@@ -60,7 +60,7 @@ DATABASE_URL="postgresql://postgres:docker@localhost:5432/big_data_health_db?sch
 
 As chaves de conexão do cloudinary estao de forma hard coded no codigo
 
-Subir o CONTAINER DO DOCKER
+Subir o CONTAINER DO DOCKER (Apenas o POSTGRES esta rodando no docker)
 $ docker compose up -d
 
 Rodar as migrates do PRISMA
