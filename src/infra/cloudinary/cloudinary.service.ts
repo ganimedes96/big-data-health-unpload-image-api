@@ -15,6 +15,7 @@ interface CloudinaryError {
 
 @Injectable()
 export class CloudinaryService {
+  
   // Função que verifica se a imagem existe
   async imageExists(assetId: string): Promise<boolean> {
     try {
