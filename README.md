@@ -25,17 +25,15 @@ $ git clone https://github.com/ganimedes96/big-data-health-unpload-image-api && 
 
 **Siga as etapas abaixo para instalar as dependências necessárias**
 
-```bash
-
 Criar o .env na raiz da aplicacao
-
+```bash
 # Install the dependencies
 $ pnpm install
 ```
 
-```bash
 Só copiar e colar tudo no terminal (estou usando linux Pop OS!)
 ele cria a chave e já coloca no .env sem apagar o conteudo.
+```bash
 
 # Gerar a chave privada
 openssl genpkey -algorithm RSA -out private.key -pkeyopt rsa_keygen_bits:2048
@@ -57,8 +55,8 @@ echo "JWT_PUBLIC_KEY=\"$JWT_PUBLIC_KEY\"" >> .env
 rm private.key public.key
 ```
 
+ Adicionar a DATABASE_URL do POSTGRES
 ```bash
-# Adicionar a DATABASE_URL do POSTGRES
 
 DATABASE_URL="postgresql://postgres:docker@localhost:5432/big_data_health_db?schema=public"
 ```
@@ -67,24 +65,23 @@ DATABASE_URL="postgresql://postgres:docker@localhost:5432/big_data_health_db?sch
 As chaves de conexão do cloudinary estao de forma hard coded no codigo
 ```
 
-```bash
 Subir o CONTAINER DO DOCKER (Apenas o POSTGRES esta rodando no docker)
+```bash
 $ docker compose up -d
 ```
 
-```bash
 Rodar as migrates do PRISMA
+```bash
 $ npx prisma migrate dev 
 ```
 
-```bash
 Como rodar a API
+```bash
 $ pnpm run start:dev
 ```
 
-```bash
 Como rodar os TESTES
-
+```bash
 #Testes e2e
 $ pnpm run test:e2e
 
