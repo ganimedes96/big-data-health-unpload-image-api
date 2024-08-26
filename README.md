@@ -31,7 +31,9 @@ Criar o .env na raiz da aplicacao
 
 # Install the dependencies
 $ pnpm install
+```
 
+```bash
 Só copiar e colar tudo no terminal (estou usando linux Pop OS!)
 ele cria a chave e já coloca no .env sem apagar o conteudo.
 
@@ -53,23 +55,34 @@ echo "JWT_PUBLIC_KEY=\"$JWT_PUBLIC_KEY\"" >> .env
 
 # Remover os arquivos de chave
 rm private.key public.key
+```
 
+```bash
 # Adicionar a DATABASE_URL do POSTGRES
 
 DATABASE_URL="postgresql://postgres:docker@localhost:5432/big_data_health_db?schema=public"
+```
 
+```bash
 As chaves de conexão do cloudinary estao de forma hard coded no codigo
+```
 
+```bash
 Subir o CONTAINER DO DOCKER (Apenas o POSTGRES esta rodando no docker)
 $ docker compose up -d
+```
 
+```bash
 Rodar as migrates do PRISMA
 $ npx prisma migrate dev 
+```
 
-
+```bash
 Como rodar a API
 $ pnpm run start:dev
+```
 
+```bash
 Como rodar os TESTES
 
 #Testes e2e
