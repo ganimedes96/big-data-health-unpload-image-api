@@ -20,7 +20,7 @@ Tecnologias utilizadas no projeto
 **Clone o projeto**
 
 ```bash
-$ git clone https://github.com/ganimedes96/big-data-health-unpload-image-api && cd CoffeeDelivery
+$ git clone https://github.com/ganimedes96/big-data-health-unpload-image-api
 ```
 
 **Siga as etapas abaixo para instalar as dependências necessárias**
