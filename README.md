@@ -56,6 +56,7 @@ rm private.key public.key
 
 DATABASE_URL="postgresql://postgres:docker@localhost:5432/big_data_health_db?schema=public"
 
+As chaves de coneccao do cloudinary estao de forma hardcode no codigo
 
 Subir o CONTAINER DO DOCKER
 $ docker compose up -d
@@ -65,6 +66,17 @@ $ npx prisma migrate dev
 
 # Install the dependencies
 $ pnpm install
+
+Como rodar a API
+$ pnpm run start:dev
+
+Como rodar os TESTES
+
+#Testes e2e
+$ pnpm run test:e2e
+
+#Testes unitarios
+$ pnpm run test
 
 ```
 
@@ -146,7 +158,7 @@ $ pnpm install
 }
 ```
 
-### 5. Listar Imagens
+### 5. Delete Imagem
 
 **Authorization: Bearer <jwt_token>**
 
@@ -159,4 +171,5 @@ $ pnpm install
   STATUSCODE: 204
  
 ```
+
 
