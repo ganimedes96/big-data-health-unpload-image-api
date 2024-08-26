@@ -29,6 +29,8 @@ $ git clone https://github.com/ganimedes96/big-data-health-unpload-image-api && 
 
 Criar o .env na raiz da aplicacao
 
+Como rodar a API
+$ pnpm run start:dev
 
 Só copiar e colar tudo no terminal (estou usando linux Pop OS!)
 ele cria a chave e já coloca no .env sem apagar o conteudo.
@@ -66,9 +68,6 @@ $ npx prisma migrate dev
 
 # Install the dependencies
 $ pnpm install
-
-Como rodar a API
-$ pnpm run start:dev
 
 Como rodar os TESTES
 
