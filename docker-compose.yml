@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  poostgres:
+    container_name: big-data-health-postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: big_data_health_db
+      PGDATA: /data/postgres
+    volumes:
+      - ./data/pg:/data/postgres
