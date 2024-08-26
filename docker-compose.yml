@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  poostgres:
+  postgres:
     container_name: big-data-health-postgres
     image: postgres
     ports:
@@ -13,3 +13,5 @@ services:
       PGDATA: /data/postgres
     volumes:
       - ./data/pg:/data/postgres
+
+  
