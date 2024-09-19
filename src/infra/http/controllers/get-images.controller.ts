@@ -1,9 +1,7 @@
 import {  BadRequestException, ConflictException, Controller, Get, HttpCode } from "@nestjs/common";
 import { CurrentUser } from "@/infra/auth/current-user-decorator";
 import { TokenPayload } from "@/infra/auth/jwt_strategy";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
 import { GetImagesByIdUseCase } from "@/domain/application/use-cases/get-images-by-id";
-import { PrismaImageMapper } from "@/infra/database/prisma/mappers/prisma-image-mapper";
 import { ResourceNotFoundError } from "@/core/erro/errors/resource-not-found-error";
 import { ImagePresenter } from "../presenters/image-presenter";
 

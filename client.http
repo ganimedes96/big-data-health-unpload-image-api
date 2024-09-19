@@ -1,5 +1,5 @@
-@baseUrl = http://localhost:3333
-@authToken = {{authenticate.response.body.access_token}}
+@baseUrl = http://localhost:3000
+@authToken = {{authenticate.response.body.accessToken}}
 
 # @name  create_account
 POST {{baseUrl}}/accounts
@@ -35,5 +35,5 @@ Content-Type: application/json
 # @name get_images
 GET {{baseUrl}}/images
 Content-Type: application/json
-Authorization: Bearer {{authToken}}
+Authorization: Bearer{{authToken}}
 

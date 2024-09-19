@@ -26,7 +26,7 @@ export class  GetImagesByIdUseCase {
     const account = await this.accountRepository.findById(accountId)
 
     if(!account) {
-      return left(new ResourceNotFoundError())
+      return left(new ResourceNotFoundError('Account not found'))
     }
 
     const images = await this.imageRepository.findManyByUserId(accountId)

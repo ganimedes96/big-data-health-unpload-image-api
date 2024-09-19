@@ -1,9 +1,5 @@
 import {  BadRequestException, Body, Controller, HttpCode, Post, UnauthorizedException, UsePipes } from "@nestjs/common";
-
-import { JwtService } from "@nestjs/jwt";
-import { compare } from "bcryptjs";
 import { ZodValidationPipe } from "@/infra/http/pipes/zod-validation";
-import { PrismaService } from "@/infra/database/prisma/prisma.service";
 import { z } from "zod";
 import { AuthenticateUseCase } from "@/domain/application/use-cases/authenticate";
 import { WrongCredentialsError } from "@/core/erro/errors/wrong-credentials-error";

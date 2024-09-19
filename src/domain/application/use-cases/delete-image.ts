@@ -24,7 +24,7 @@ export class  DeleteImageUseCase {
   async execute({ assetId}: DeleteImageUseCaseRequest): Promise<DeleteImageUseCaseResponse> {
     const image = await this.imageRepository.findImageByAssetId(assetId)
     if (!image) {
-      return left(new ResourceNotFoundError())
+      return left(new ResourceNotFoundError('Image not found'))
     }
     await this.imageRepository.delete(image.assetId)
 

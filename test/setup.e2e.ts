@@ -1,4 +1,7 @@
-import 'dotenv/config'
+import {config} from 'dotenv'
+
+config({ path: '.env', override: true })
+config({ path: '.env.test', override: true })
 
 import { PrismaClient } from '@prisma/client'
 import { afterAll, beforeAll } from 'vitest'

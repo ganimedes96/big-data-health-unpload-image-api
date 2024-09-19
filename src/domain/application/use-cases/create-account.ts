@@ -18,11 +18,11 @@ export class  CreateAccountUseCase {
   constructor(
       private  accountRepository: AccountRepository,
       private hashGenerator: HashGenerator,
-
     ) {}
 
   async execute({email, name, password}: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
     const accountWithSameEmail = await this.accountRepository.findByEmail(email)
+
     if(accountWithSameEmail) {
       return left(new UserAlreadyExistsError(accountWithSameEmail.email))
     }

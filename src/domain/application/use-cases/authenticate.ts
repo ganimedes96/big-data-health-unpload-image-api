@@ -9,7 +9,6 @@ interface AuthenticaUseCaseRequest {
   email: string
   password: string
 }
-
 type CreateUserUseCaseResponse = Either<WrongCredentialsError, 
 {
   accessToken: string

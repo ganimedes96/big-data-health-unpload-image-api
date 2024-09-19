@@ -1,12 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { UploadApiResponse, UploadApiErrorResponse } from 'cloudinary';
 import { v2 as cloudinary } from 'cloudinary';
+import { EnvService } from '../env/env.service';
 
-cloudinary.config({
-  cloud_name: 'dyd5chidz',
-  api_key: '486729324851179',
-  api_secret: 'Mx8aeR-6HkrE0dr0oV8TDZ_JbvM',
-});
 
 interface CloudinaryError {
   http_code: number;
@@ -15,9 +11,17 @@ interface CloudinaryError {
 
 @Injectable()
 export class CloudinaryService {
-  
+ 
+  constructor( private envService: EnvService) {
+    cloudinary.config({
+      cloud_name: envService.get('CLOUD_NAME'),
+      api_key: envService.get('API_KEY'),
+      api_secret: envService.get('API_SECRET'),
+    });
+  }
   // Função que verifica se a imagem existe
   async imageExists(assetId: string): Promise<boolean> {
+   
     try {
       const result = await cloudinary.api.resource(assetId);
       return !!result;
@@ -37,7 +41,7 @@ export class CloudinaryService {
   async uploadImage(file: Express.Multer.File): Promise<UploadApiResponse | UploadApiErrorResponse> {
     return new Promise((resolve, reject) => {
       cloudinary.uploader.upload_stream(
-        { folder: 'images' },
+        { folder: this.envService.get('CLOUDINARY_BUCKET_PATH') },
         (error, result) => {
           if (error) return reject(error);
           if (!result) return reject(new Error("Upload result is undefined"));
@@ -46,7 +50,8 @@ export class CloudinaryService {
       ).end(file.buffer);
     });
   }
-  async deleteImage(publicId: string): Promise<any> {
+
+  private async deleteImage(publicId: string): Promise<any> {
     return new Promise((resolve, reject) => {
       
       cloudinary.uploader.destroy(publicId, (error, result) => {
@@ -57,14 +62,15 @@ export class CloudinaryService {
     })
   }
 
-  async getPublicIdByAssetId(assetId: string) {
+  async getPublicIdByAssetId(assetId: string): Promise<string | null> {
     return new Promise<string | null>((resolve, reject) => {
       cloudinary.api.resources(
-        { asset_id: assetId },
+        { asset_id: assetId, max_results: 1 }, // max_results para garantir que peguemos apenas um resultado
         (error, result) => {
           if (error) return reject(error);
-          if (result.resources.length > 0) {
-            resolve(result.resources[0].public_id);
+          if (result.resources && result.resources.length > 0) {
+            const publicId = result.resources[0].public_id; // Pegue o primeiro public_id
+            resolve(publicId);
           } else {
             resolve(null);
           }

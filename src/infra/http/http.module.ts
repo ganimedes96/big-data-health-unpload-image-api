@@ -3,7 +3,7 @@ import { AuthenticateController } from "./controllers/authenticate.controller";
 import { CreateAccountController } from "./controllers/create-account.controller";
 import { DeleteImageController } from "./controllers/delete-image.controller";
 import { GetImagesController } from "./controllers/get-images.controller";
-import { ImageUnploadController } from "./controllers/image-unpload.controller";
+import { ImageUnploadController } from "./controllers/image-upload.controller";
 import { CloudinaryModule } from "../cloudinary/cloudinary.module";
 import { DatabaseModule } from "../database/dabase.module";
 import { CreateAccountUseCase } from "@/domain/application/use-cases/create-account";

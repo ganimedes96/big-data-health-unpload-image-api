@@ -4,6 +4,8 @@ import { Test } from "@nestjs/testing"
 import { AppModule } from "../../app.module"
 import request from "supertest"
 import { PrismaService } from "@/infra/database/prisma/prisma.service"
+import { AccountFactory } from "test/factories/make-account"
+import { DatabaseModule } from "@/infra/database/dabase.module"
 
 describe('Create account (E2E)', () => {
 let app: INestApplication
@@ -11,11 +13,13 @@ let prisma: PrismaService
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, DatabaseModule],
+      providers: [AccountFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
     prisma = moduleRef.get(PrismaService)
+
     await app.init()
   })
 

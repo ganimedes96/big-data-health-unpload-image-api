@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CloudinaryService } from './cloudinary.service';
 import { MulterModule } from '@nestjs/platform-express';
+import { EnvService } from '../env/env.service';
 
 @Module({
   imports: [
@@ -8,7 +9,7 @@ import { MulterModule } from '@nestjs/platform-express';
       dest: './images',
     }),
   ],
-  providers: [CloudinaryService],
+  providers: [CloudinaryService, EnvService],
   exports: [CloudinaryService],
 })
 export class CloudinaryModule {}

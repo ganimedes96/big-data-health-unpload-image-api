@@ -1,9 +1,10 @@
-import { Controller, FileTypeValidator, HttpCode, HttpStatus, MaxFileSizeValidator, ParseFilePipe, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { BadRequestException, ConflictException, Controller, FileTypeValidator, HttpCode, MaxFileSizeValidator, ParseFilePipe, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { CurrentUser } from "@/infra/auth/current-user-decorator";
 import { TokenPayload } from "@/infra/auth/jwt_strategy";
 import { CloudinaryService } from "@/infra/cloudinary/cloudinary.service";
 import { SaveImageUseCase } from "@/domain/application/use-cases/save-image";
+import { ResourceNotFoundError } from "@/core/erro/errors/resource-not-found-error";
 
 
 @Controller('/images')
@@ -31,13 +32,23 @@ export class ImageUnploadController {
   ) {
     const result = await this.cloudinary.uploadImage(file);
     
-    await this.saveImageUsecase.execute({
+    const rsult = await this.saveImageUsecase.execute({
       url: result.url,
       publicId: result.public_id,
       accountId: user.sub,
       assetId: result.asset_id,
       displayName: result.display_name
     })
+
+    if(rsult.isLeft()) {
+      const error = rsult.value
+      switch(error.constructor) {
+        case ResourceNotFoundError:
+          throw new BadRequestException(error.message)
+        default:
+          throw new BadRequestException(error.message)
+      }
+    }
     
   }
 }
